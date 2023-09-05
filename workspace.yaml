@@ -6,4 +6,4 @@ extensions: []
 lifecycle:
   init:
   - name: "auto"
-    command: "pip install -r requirement"
+    command: "pip install -r requirement.txt"
