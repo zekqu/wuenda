@@ -62,7 +62,7 @@ _ = load_dotenv(find_dotenv())
 
 
 同时我们要输入自己的OPENAI_API_KEY,可以去Openai官方获取,然后你只需要把你的API_KEY填进这里就行了。
-![](4.png)。
+![](https://help-assets-1257242599.cos.ap-shanghai.myqcloud.com/enterprise/2023/9/4.jpg)
 
 之后我们需要定义两个函数一个是getCompletion函数,我们在里面给定了prompt,将提示放入了类似于某种用户消息的东西中,这是因为模型是一个聊天模型,所以用户的信息是输入,而模型是输出的一种表达。
 
