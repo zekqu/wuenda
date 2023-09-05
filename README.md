@@ -130,8 +130,6 @@ def collect_messages(_):
 同时我们可以设置并运行这种UI以显示我们的AI客服。
 
 - **设置prompt语句与UI界面**
-<br>
-<br>
 ```python
 import panel as pn  # GUI
 pn.extension()
