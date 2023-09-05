@@ -46,7 +46,7 @@
 
 首先我们要设置一个 Openai Python包
 
-```shell
+```python
 import os
 import openai
 from dotenv import load_dotenv , find_dotenv 
@@ -57,9 +57,24 @@ _ = load_dotenv(find_dotenv())
 同时我们要输入自己的OPENAI_API_KEY,可以去Openai官方获取,然后你只需要把你的API_KEY填进这里就行了。
 ![](https://help-assets-1257242599.cos.ap-shanghai.myqcloud.com/enterprise/2023/9/4.png)
 
-之后我们需要定义两个函数一个是getCompletion函数,我们在里面给定了prompt,将提示放入了类似于某种用户消息的东西中,这是因为模型是一个聊天模型,所以用户的信息是输入,而模型是输出的一种表达。
+像 ChatGPT 这样的聊天模型实际上是组装成以一系列消息作为输入，并返回一个模型生成的消息作为输出的。虽然聊天格式的设计旨在使这种多轮对话变得容易，但我们通过之前的学习可以知道，它对于没有任何对话的单轮任务也同样有用。
 
-```shell
+
+接下来，我们将定义两个辅助函数。第一个是单轮的，我们将prompt放入看起来像是某种用户消息的东西中。另一个则传入一个消息列表。这些消息可以来自不同的角色，我们会描述一下这些角色。
+
+
+第一条消息是一个系统消息，它提供了一个总体的指示，然后在这个消息之后，我们有用户和助手之间的交替。如果你曾经使用过 ChatGPT 网页界面，那么你的消息是用户消息，而 ChatGPT 的消息是助手消息。系统消息则有助于设置助手的行为和角色，并作为对话的高级指示。
+
+你可以想象它在助手的耳边低语，引导它的回应，而用户不会注意到系统消息。
+
+因此，作为用户，如果你曾经使用过 ChatGPT，你可能不知道 ChatGPT 的系统消息是什么，这是有意为之的。系统消息的好处是为开发者提供了一种方法，在不让请求本身成为对话的一部分的情况下，引导助手并指导其回应。
+
+
+- **定义第一个辅助函数**
+
+这两个函数是用于聊天的自动补全。
+
+```python
 def get_completion(prompt , model ='gpt-3.5-turbo'):
     messages=[{'role': 'user' , 'content':prompt}]
     response = openai.ChatCompletion.create(
@@ -78,11 +93,16 @@ def get_completion_from_messages(messages,model='gpt-3.5-turbo',temperature=0):
     print(response.choices[0].message)
     return response.choices[0].message['content']                                                           
 ```
-同时我们通过定义另一个辅助函数,它将从下面构建的用户界面中收集提示,
+
+
+- **定义另一个辅助函数**
+
+
+它将从下面构建的用户界面中收集提示,
 然后将其追加到一个名为上下文的列表中,并每次使用上下文调用模型。这样他就会不断的增长。
 
                                                
-```shell
+```python
 
 def collect_messages(_):
     prompt = inp.value_input
@@ -98,15 +118,21 @@ def collect_messages(_):
     return pn.Column(*panels)                                                            
 ```
 
+两个辅助函数定义显示如下:
+<br>
+<br>
 ![](https://help-assets-1257242599.cos.ap-shanghai.myqcloud.com/enterprise/2023/9/5.jpg)
-定义了两个函数之后,我们可以设置并运行这种UI以显示我们的AI客服
+<br>
+<br>
+定义了两个函数之后,我们通过**context**来描述prompt,通过prompt让客服知道自己的工作是什么,以及披萨店商品的价格和基本规则。
 
 
+同时我们可以设置并运行这种UI以显示我们的AI客服。
 
-同时我们通过定义另一个辅助函数,它将从下面构建的用户界面中收集提示,
-然后将其追加到一个名为上下文的列表中,并每次使用上下文调用模型。这样他就会不断的增长。
-
-```shell
+- **设置prompt语句与UI界面**
+<br>
+<br>
+```python
 import panel as pn  # GUI
 pn.extension()
 
@@ -161,6 +187,9 @@ dashboard
 ![](https://help-assets-1257242599.cos.ap-shanghai.myqcloud.com/enterprise/2023/9/6.jpg)
 我们就可以和披萨店的AI客服进行对话了！你可以和他确认任何你想要的pizza。
 
+
+由此我们就构建了一个“订餐机器人”,我们可以通过它自动收集用户的信息,接受披萨店的订单。诸如此类的小程序我们可以通过人工智能的能力实现很多,快跟上我们的脚步一起拥抱人工智能吧!
+
 接下来立即前往 Cloud Studio 体验一下创建自己的AI应用吧!
 
-[![Cloud Studio Template](https://cs-res.codehub.cn/common/assets/icon-badge.svg)](https://cloudstudio.net/templates/rCtBrwUdoOo)
+[![Cloud Studio Template](https://cs-res.codehub.cn/common/assets/icon-badge.svg)](https://cloudstudio.net/templates/3gq4ub535kw)
