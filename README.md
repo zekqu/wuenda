@@ -84,7 +84,6 @@ def get_completion_from_messages(messages,model='gpt-3.5-turbo',temperature=0):
     )
     print(response.choices[0].message)
     return response.choices[0].message['content']                                                           
-```
 
 同时我们通过定义另一个辅助函数,它将从下面构建的用户界面中收集提示,
 然后将其追加到一个名为上下文的列表中,并每次使用上下文调用模型。这样他就会不断的增长。
@@ -104,8 +103,7 @@ def collect_messages(_):
     return pn.Column(*panels)                                                 
 ```
 
-![](5.jpg)
-
+![](https://help-assets-1257242599.cos.ap-shanghai.myqcloud.com/enterprise/2023/9/5.jpg)
 定义了两个函数之后,我们可以设置并运行这种UI以显示我们的AI客服
 
 ```
@@ -165,8 +163,7 @@ dashboard
 ```
 
 所以这里有上下文,并包含菜单的系统消息,然后我们就可以执行这个命令了。
-![](6.jpg)
-
+![](https://help-assets-1257242599.cos.ap-shanghai.myqcloud.com/enterprise/2023/9/6.jpg)
 我们就可以和披萨店的AI客服进行对话了！你可以和他确认任何你想要的pizza。
 
 接下来立即前往 Cloud Studio 体验一下创建自己的AI应用吧!
