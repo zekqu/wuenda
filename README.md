@@ -77,13 +77,12 @@ def get_completion_from_messages(messages,model='gpt-3.5-turbo',temperature=0):
     )
     print(response.choices[0].message)
     return response.choices[0].message['content']                                                           
-
+```
 同时我们通过定义另一个辅助函数,它将从下面构建的用户界面中收集提示,
 然后将其追加到一个名为上下文的列表中,并每次使用上下文调用模型。这样他就会不断的增长。
 
-
                                                
-```
+```shell
 
 def collect_messages(_):
     prompt = inp.value_input
@@ -102,7 +101,7 @@ def collect_messages(_):
 ![](https://help-assets-1257242599.cos.ap-shanghai.myqcloud.com/enterprise/2023/9/5.jpg)
 定义了两个函数之后,我们可以设置并运行这种UI以显示我们的AI客服
 
-```
+
 
 同时我们通过定义另一个辅助函数,它将从下面构建的用户界面中收集提示,
 然后将其追加到一个名为上下文的列表中,并每次使用上下文调用模型。这样他就会不断的增长。
