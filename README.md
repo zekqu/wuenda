@@ -130,7 +130,10 @@ def collect_messages(_):
 同时我们可以设置并运行这种UI以显示我们的AI客服。
 
 - **设置prompt语句与UI界面**
+
+                                               
 ```python
+
 import panel as pn  # GUI
 pn.extension()
 
@@ -178,9 +181,8 @@ dashboard = pn.Column(
     pn.panel(interactive_conversation, loading_indicator=True, height=300),
 )
 
-dashboard                                                 
+dashboard                                                                               
 ```
-
 所以这里有上下文,并包含菜单的系统消息,然后我们就可以执行这个命令了。
 ![](https://help-assets-1257242599.cos.ap-shanghai.myqcloud.com/enterprise/2023/9/6.jpg)
 我们就可以和披萨店的AI客服进行对话了！你可以和他确认任何你想要的pizza。
