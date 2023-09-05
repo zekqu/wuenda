@@ -35,8 +35,7 @@
 
 让我们先来看看我们做出来的的AI披萨店客服是怎样回答问题的:
 
-![](11.gif)
-![](https://help-assets-1257242599.cos.ap-shanghai.myqcloud.com/enterprise/2023/9/6.jpg)
+![](https://help-assets-1257242599.cos.ap-shanghai.myqcloud.com/enterprise/2023/9/123.gif)
 
  我们可以看到当我们点需要的pizza的时候,它会问你详细的尺寸并且告诉你相应的钱是多少。
 
