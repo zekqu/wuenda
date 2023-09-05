@@ -40,15 +40,9 @@
  我们可以看到当我们点需要的pizza的时候,它会问你详细的尺寸并且告诉你相应的钱是多少。
 
 
- ## 如何使用
+##  如何应用
 
- Cloud Studio 在线编程平台支持使用CODING (opens new window)账号和 GitHub 账号，以及微信登录，可以在登录 (opens new window) 界面输入相应的账号登录前往 Web IDE，这里使用微信登录。
-![](https://help-assets-1257242599.cos.ap-shanghai.myqcloud.com/enterprise/2023/5/5-3.png)
 
- Cloud Studio 是基于浏览器的集成式开发环境(IDE)，为开发者提供了一个永不间断的云端工作站。用户在使用CloudStudio 时无需安装，随时随地打开浏览器就能在线编程。
-
- 这里 Cloud Studio 提供了多种的模版,我们就选择jupter模版、。
-同时我们运行然后我们就可以开始创建专属我们的披萨店AI客服了。
 
 首先我们要设置一个 Openai Python包
 
@@ -87,7 +81,10 @@ def get_completion_from_messages(messages,model='gpt-3.5-turbo',temperature=0):
 同时我们通过定义另一个辅助函数,它将从下面构建的用户界面中收集提示,
 然后将其追加到一个名为上下文的列表中,并每次使用上下文调用模型。这样他就会不断的增长。
 
-```shell
+
+                                               
+```
+
 def collect_messages(_):
     prompt = inp.value_input
     inp.value = ''
@@ -99,7 +96,7 @@ def collect_messages(_):
     panels.append(
         pn.Row('Assistant:', pn.pane.Markdown(response, width=600, style={'background-color': '#F6F6F6'})))
 
-    return pn.Column(*panels)                                                 
+    return pn.Column(*panels)                                                            
 ```
 
 ![](https://help-assets-1257242599.cos.ap-shanghai.myqcloud.com/enterprise/2023/9/5.jpg)
