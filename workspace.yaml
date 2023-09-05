@@ -1,0 +1,9 @@
+# 修改完 workspace.yaml 后,你需要点击保存修改并重新启动工作空间以使其生效。
+---
+version: "v1"
+image: "cloudstudio-devops-docker.pkg.coding.net/artifacts/workspace/python-3.11:2023-09-05.0654"
+extensions: []
+lifecycle:
+  init:
+  - name: "auto"
+    command: "pip install -r requirement"
