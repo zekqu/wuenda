@@ -55,6 +55,8 @@ _ = load_dotenv(find_dotenv())
 
 
 同时我们要输入自己的OPENAI_API_KEY,可以去Openai官方获取,然后你只需要把你的API_KEY填进这里就行了。
+<br>
+<br>
 ![](https://help-assets-1257242599.cos.ap-shanghai.myqcloud.com/enterprise/2023/9/4.png)
 
 像 ChatGPT 这样的聊天模型实际上是组装成以一系列消息作为输入，并返回一个模型生成的消息作为输出的。虽然聊天格式的设计旨在使这种多轮对话变得容易，但我们通过之前的学习可以知道，它对于没有任何对话的单轮任务也同样有用。
@@ -71,7 +73,8 @@ _ = load_dotenv(find_dotenv())
 
 
 - **定义第一个辅助函数**
-
+<br>
+<br>
 这两个函数是用于聊天的自动补全。
 
 ```python
@@ -184,7 +187,11 @@ dashboard = pn.Column(
 dashboard                                                                               
 ```
 所以这里有上下文,并包含菜单的系统消息,然后我们就可以执行这个命令了。
+<br>
+<br>
 ![](https://help-assets-1257242599.cos.ap-shanghai.myqcloud.com/enterprise/2023/9/6.jpg)
+<br>
+<br>
 我们就可以和披萨店的AI客服进行对话了！你可以和他确认任何你想要的pizza。
 
 
