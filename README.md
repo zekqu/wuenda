@@ -186,7 +186,7 @@ dashboard = pn.Column(
 
 dashboard                                                                               
 ```
-所以这里有上下文,并包含菜单的系统消息,然后我们就可以执行这个命令了。
+这里有上下文,并包含菜单的系统消息,然后我们就可以执行这个命令了。
 <br>
 <br>
 ![](https://help-assets-1257242599.cos.ap-shanghai.myqcloud.com/enterprise/2023/9/6.jpg)
@@ -194,9 +194,109 @@ dashboard
 <br>
 我们就可以和披萨店的AI客服进行对话了！你可以和他确认任何你想要的pizza。
 
+与此同时我们还可以要求模型创建一个JSON摘要发给订餐系统。
 
+所以我们现在需要追加另一个系统消息,他是另外一条prompt,我们想要的是刚刚订单的JSON摘要,这个摘要需要包含刚才订单的所有内容。
+
+在这种订单任务中,我们会使用一个比较低的temperature,让模型的回答尽可能的一致且可预测:
+
+- **订单系统摘要**
+```python
+messages =  context.copy()
+messages.append(
+{'role':'system', 'content':'create a json summary of the previous food order. Itemize the price for each item\
+ The fields should be 1) pizza, include size 2) list of toppings 3) list of drinks, include size   4) list of sides include size  5)total price '},    
+)
+ #The fields should be 1) pizza, price 2) list of toppings 3) list of drinks, include size include price  4) list of sides include size include price, 5)total price '},    
+
+response = get_completion_from_messages(messages, temperature=0)
+print(response)                                                       
+```
+<br>
+<br>
+
+同样的,我们可以翻译英文prompt做一个中文的披萨店客服,只需要我们把我们的prompt语句换成中文就可以了
+
+- **中文披萨店客服**
+
+```python
+import panel as pn  # GUI
+pn.extension()
+
+panels = [] # collect display 
+
+context = [{'role':'system', 'content':"""
+你是订餐机器人，为披萨餐厅自动收集订单信息。
+你要首先问候顾客。然后等待用户回复收集订单信息。收集完信息需确认顾客是否还需要添加其他内容。
+最后需要询问是否自取或外送，如果是外送，你要询问地址。
+最后告诉顾客订单总金额，并送上祝福。
+
+请确保明确所有选项、附加项和尺寸，以便从菜单中识别出该项唯一的内容。
+你的回应应该以简短、非常随意和友好的风格呈现。
+
+菜单包括：
+
+菜品：
+意式辣香肠披萨（大、中、小） 12.95、10.00、7.00
+芝士披萨（大、中、小） 10.95、9.25、6.50
+茄子披萨（大、中、小） 11.95、9.75、6.75
+薯条（大、小） 4.50、3.50
+希腊沙拉 7.25
+
+配料：
+奶酪 2.00
+蘑菇 1.50
+香肠 3.00
+加拿大熏肉 3.50
+AI酱 1.50
+辣椒 1.00
+
+饮料：
+可乐（大、中、小） 3.00、2.00、1.00
+雪碧（大、中、小） 3.00、2.00、1.00
+瓶装水 5.00
+"""} ]  # accumulate messages
+
+
+inp = pn.widgets.TextInput(value="Hi", placeholder='Enter text here…')
+button_conversation = pn.widgets.Button(name="Chat!")
+
+interactive_conversation = pn.bind(collect_messages, button_conversation)
+
+dashboard = pn.Column(
+    inp,
+    pn.Row(button_conversation),
+    pn.panel(interactive_conversation, loading_indicator=True, height=300),
+)                                                    
+```
+
+效果如下:
+<br>
+<br>
+![](https://help-assets-1257242599.cos.ap-shanghai.myqcloud.com/enterprise/2023/9/8.jpg)
+<br>
+<br>
+
+
+- **中文版食品订单的JSON摘要**
+
+
+```python
+messages =  context.copy()
+messages.append(
+{'role':'system', 'content':'创建上一个食品订单的 json 摘要。\
+逐项列出每件商品的价格，字段应该是 1) 披萨，包括大小 2) 配料列表 3) 饮料列表，包括大小 4) 配菜列表包括大小 5) 总价'},    
+)
+
+response = get_completion_from_messages(messages, temperature=0)
+print(response)                                                      
+```
+
+
+我们刚刚点了一个小的芝士披萨,这个订单已经被记录了下来:
+<br>
+<br>
+![](https://help-assets-1257242599.cos.ap-shanghai.myqcloud.com/enterprise/2023/9/9.jpg)
+<br>
+<br>
 由此我们就构建了一个“订餐机器人”,我们可以通过它自动收集用户的信息,接受披萨店的订单。诸如此类的小程序我们可以通过人工智能的能力实现很多,快跟上我们的脚步一起拥抱人工智能吧!
-
-接下来立即前往 Cloud Studio 体验一下创建自己的AI应用吧!
-
-[![Cloud Studio Template](https://cs-res.codehub.cn/common/assets/icon-badge.svg)](https://cloudstudio.net/templates/3gq4ub535kw)
