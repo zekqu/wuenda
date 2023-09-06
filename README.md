@@ -57,8 +57,9 @@ _ = load_dotenv(find_dotenv())
 同时我们要输入自己的OPENAI_API_KEY,可以去Openai官方获取,然后你只需要把你的API_KEY填进这里就行了。
 <br>
 <br>
-![](https://help-assets-1257242599.cos.ap-shanghai.myqcloud.com/enterprise/2023/9/4.png)
-
+![](https://help-assets-1257242599.cos.ap-shanghai.myqcloud.com/enterprise/2023/9/10.png)
+<br>
+<br>
 像 ChatGPT 这样的聊天模型实际上是组装成以一系列消息作为输入，并返回一个模型生成的消息作为输出的。虽然聊天格式的设计旨在使这种多轮对话变得容易，但我们通过之前的学习可以知道，它对于没有任何对话的单轮任务也同样有用。
 
 
@@ -186,6 +187,7 @@ dashboard = pn.Column(
 
 dashboard                                                                               
 ```
+
 这里有上下文,并包含菜单的系统消息,然后我们就可以执行这个命令了。
 <br>
 <br>
@@ -201,6 +203,7 @@ dashboard
 在这种订单任务中,我们会使用一个比较低的temperature,让模型的回答尽可能的一致且可预测:
 
 - **订单系统摘要**
+
 ```python
 messages =  context.copy()
 messages.append(
@@ -212,9 +215,9 @@ messages.append(
 response = get_completion_from_messages(messages, temperature=0)
 print(response)                                                       
 ```
-<br>
-<br>
 
+<br>
+<br>
 同样的,我们可以翻译英文prompt做一个中文的披萨店客服,只需要我们把我们的prompt语句换成中文就可以了
 
 - **中文披萨店客服**
