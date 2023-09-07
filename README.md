@@ -117,7 +117,7 @@ def collect_messages(_):
     panels.append(
         pn.Row('User:', pn.pane.Markdown(prompt, width=600)))
     panels.append(
-        pn.Row('Assistant:', pn.pane.Markdown(response, width=600, style={'background-color': '#F6F6F6'})))
+        pn.Row('Assistant:', pn.pane.Markdown(response, width=600, style={'background-color': '#333333'})))
 
     return pn.Column(*panels)                                                            
 ```
@@ -128,7 +128,43 @@ def collect_messages(_):
 ![](https://help-assets-1257242599.cos.ap-shanghai.myqcloud.com/enterprise/2023/9/5.jpg)
 <br>
 <br>
-定义了两个函数之后,我们通过**context**来描述prompt,通过prompt让客服知道自己的工作是什么,以及披萨店商品的价格和基本规则。
+
+## 小试牛刀
+
+现在我们尝试告诉模型你是一个说话像莎士比亚的助手。这是我们向助手描述它应该如何表现的方式。然后，第一个用户消息是，给我讲个笑话。接下来的消息是，为什么鸡会过马路？然后最后一个用户消息是，我不知道。
+<br>
+<br>
+![](https://help-assets-1257242599.cos.ap-shanghai.myqcloud.com/enterprise/2023/9/11.jpg)
+<br>
+<br>
+让我们做另一个例子。助手的消息是，你是一个友好的聊天机器人，第一个用户消息是，嗨，我叫Isa。我们想要得到第一个用户消息。
+<br>
+<br>
+![](https://help-assets-1257242599.cos.ap-shanghai.myqcloud.com/enterprise/2023/9/14.jpg)
+<br>
+<br>
+
+让我们再试一个例子。系统消息是，你是一个友好的聊天机器人，第一个用户消息是，是的，你能提醒我我的名字是什么吗？
+
+如上所见，模型实际上并不知道我的名字。
+<br>
+<br>
+![](https://help-assets-1257242599.cos.ap-shanghai.myqcloud.com/enterprise/2023/9/12.jpg)
+<br>
+<br>
+因此，每次与语言模型的交互都是一个独立的交互，这意味着我们必须提供所有相关的消息，以便模型在当前对话中进行引用。如果想让模型引用或 “记住” 对话的早期部分，则必须在模型的输入中提供早期的交流。我们将其称为上下文。让我们试试。
+<br>
+<br>
+![](https://help-assets-1257242599.cos.ap-shanghai.myqcloud.com/enterprise/2023/9/13.jpg)
+<br>
+<br>
+现在我们已经给模型提供了上下文，也就是之前的对话中提到的我的名字，然后我们会问同样的问题，也就是我的名字是什么。因为模型有了需要的全部上下文，所以它能够做出回应，就像我们在输入的消息列表中看到的一样。
+<br>
+<br>
+## AI披萨店客服
+
+由此我们知道,我们可以通过**context**来描述prompt,在披萨店的规则也是一样:通过prompt让客服知道自己的工作是什么,以及披萨店商品的价格和基本规则。
+
 
 
 同时我们可以设置并运行这种UI以显示我们的AI客服。
