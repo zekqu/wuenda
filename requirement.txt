@@ -2,3 +2,6 @@ openai
 python-dotenv
 panel
 jupyter_bokeh
+langchain 
+docarray  
+tiktoken
